@@ -1,17 +1,17 @@
 {
   "hosting": {
     "site": "fandi-portofolio",
-    "public": "public",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
+    "frameworksBackend": {
+      "region": "asia-east1"
+    },
     "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
+      { "source": "**", "destination": "/index.html" }
     ]
   }
 }
