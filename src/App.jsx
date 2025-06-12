@@ -7,6 +7,7 @@ import AboutSection from "./sections/AboutSection.jsx"; // Added .jsx extension
 import TechStackSection from "./sections/TechStackSection.jsx"; // Added .jsx extension
 import ProjectsSection from "./sections/ProjectsSection.jsx"; // Added .jsx extension
 import ContactSection from "./sections/ContactSection.jsx"; // Added .jsx extension
+import ResumeViewer from "./sections/ResumeViewer.jsx";
 
 const App = () => {
   const [showMobileWarning, setShowMobileWarning] = useState(false);
@@ -46,7 +47,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const sections = ["home", "about", "projects", "contact"];
+    const sections = ["home", "about", "projects", "contact", "resume"];
     const observers = [];
 
     sections.forEach((id) => {
@@ -69,8 +70,10 @@ const App = () => {
   }, []);
 
   const scrollToSection = (id) => {
+    console.log(id);
     const element = document.getElementById(id);
     if (element) {
+      console.log("ditekan");
       element.scrollIntoView({ behavior: "smooth" });
       setActiveSection(id);
     }
@@ -100,7 +103,7 @@ const App = () => {
           <div className={`text-2xl font-extrabold ${theme === "dark" ? "text-indigo-400" : "text-indigo-700"}`}>Moh. Dwi Afandi</div>
           <div className="flex items-center space-x-6"> {/* Menambahkan flex dan space-x untuk toggle */}
             <div className="hidden space-x-6 md:flex">
-              {["home", "about", "projects", "contact"].map((id) => (
+              {["home", "about", "projects", "contact", "resume"].map((id) => (
                 <NavItem
                   key={id}
                   id={id}
@@ -130,7 +133,12 @@ const App = () => {
         <TechStackSection />
         <ProjectsSection showMobileWarning={showMobileWarning} />
         <ContactSection />
+        <ResumeViewer />
       </main>
+
+      {/* <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6"> */}
+      {/* <ResumeViewer /> */}
+    {/* </div> */}
     </div>
   );
 };
