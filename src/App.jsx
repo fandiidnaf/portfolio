@@ -1,16 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { Smartphone, Monitor } from "lucide-react";
+import { Smartphone, Monitor, Sun, Moon } from "lucide-react"; // Import Sun and Moon icons
 
-import NavItem from "./components/NavItem";
-import HomeSection from "./sections/HomeSection";
-import AboutSection from "./sections/AboutSection";
-import TechStackSection from "./sections/TechStackSection";
-import ProjectsSection from "./sections/ProjectsSection";
-import ContactSection from "./sections/ContactSection";
+import NavItem from "./components/NavItem.jsx"; // Added .jsx extension
+import HomeSection from "./sections/HomeSection.jsx"; // Added .jsx extension
+import AboutSection from "./sections/AboutSection.jsx"; // Added .jsx extension
+import TechStackSection from "./sections/TechStackSection.jsx"; // Added .jsx extension
+import ProjectsSection from "./sections/ProjectsSection.jsx"; // Added .jsx extension
+import ContactSection from "./sections/ContactSection.jsx"; // Added .jsx extension
 
 const App = () => {
   const [showMobileWarning, setShowMobileWarning] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  // State untuk mengelola tema, default-nya 'light' atau dari localStorage
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') { // Pastikan window tersedia sebelum mengakses localStorage
+      const savedTheme = localStorage.getItem("theme");
+      return savedTheme ? savedTheme : "light";
+    }
+    return "light"; // Default to light if window is not defined (e.g., during SSR)
+  });
+
+  // Efek untuk menyimpan tema ke localStorage setiap kali 'theme' berubah
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("theme", theme);
+      // Terapkan atau hapus kelas 'dark' pada elemen HTML root
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    }
+  }, [theme]);
+
+  // Fungsi untuk beralih tema
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
 
   useEffect(() => {
     const checkMobile = () => setShowMobileWarning(window.innerWidth < 768);
@@ -51,7 +77,8 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 font-inter text-gray-800">
+    // Terapkan kelas Tailwind CSS 'dark' secara kondisional pada elemen root
+    <div className={`min-h-screen font-inter ${theme === "dark" ? "bg-gray-900 text-gray-200" : "bg-gradient-to-br from-indigo-50 to-purple-50 text-gray-800"}`}>
       {/* Mobile Warning */}
       {showMobileWarning && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4 md:hidden">
@@ -68,19 +95,30 @@ const App = () => {
       )}
 
       {/* Navbar */}
-      <nav className="fixed top-0 z-40 w-full bg-white bg-opacity-90 shadow-md backdrop-blur-sm rounded-b-xl">
+      <nav className={`fixed top-0 z-40 w-full shadow-md backdrop-blur-sm rounded-b-xl ${theme === "dark" ? "bg-gray-800 bg-opacity-90" : "bg-white bg-opacity-90"}`}>
         <div className="container mx-auto flex items-center justify-between p-4">
-          <div className="text-2xl font-extrabold text-indigo-700">Moh. Dwi Afandi</div>
-          <div className="hidden space-x-6 md:flex">
-            {["home", "about", "projects", "contact"].map((id) => (
-              <NavItem
-                key={id}
-                id={id}
-                active={activeSection === id}
-                onClick={() => scrollToSection(id)}
-                label={id.charAt(0).toUpperCase() + id.slice(1).replace("-", " ")}
-              />
-            ))}
+          <div className={`text-2xl font-extrabold ${theme === "dark" ? "text-indigo-400" : "text-indigo-700"}`}>Moh. Dwi Afandi</div>
+          <div className="flex items-center space-x-6"> {/* Menambahkan flex dan space-x untuk toggle */}
+            <div className="hidden space-x-6 md:flex">
+              {["home", "about", "projects", "contact"].map((id) => (
+                <NavItem
+                  key={id}
+                  id={id}
+                  active={activeSection === id}
+                  onClick={() => scrollToSection(id)}
+                  label={id.charAt(0).toUpperCase() + id.slice(1).replace("-", " ")}
+                />
+              ))}
+            </div>
+            {/* Tombol Light/Dark Mode */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-colors duration-300
+                ${theme === "dark" ? "bg-gray-700 text-yellow-300 hover:bg-gray-600" : "bg-gray-200 text-indigo-700 hover:bg-gray-300"}`}
+              aria-label="Toggle light/dark mode"
+            >
+              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
           </div>
         </div>
       </nav>

@@ -1,20 +1,20 @@
 import React from "react";
-import TechStackCard from "../components/TechStackCard";
+import TechStackCard from "../components/TechStackCard"; // Make sure TechStackCard also supports dark mode
 
 const TechStackSection = ({scrollToSection}) => {
  return (
     <section
     id="tech-stack"
-    className="py-16 md:py-24 bg-indigo-50 rounded-2xl my-8"
+    className="py-16 md:py-24 bg-indigo-50 rounded-2xl my-8 dark:bg-gray-900"
   >
     <div className="text-center mb-12">
-      <h2 className="text-4xl font-bold text-gray-900">Tech Stack</h2>
-      <p className="mt-4 text-gray-600 text-lg max-w-xl mx-auto">
+      <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Tech Stack</h2>
+      <p className="mt-4 text-gray-600 text-lg max-w-xl mx-auto dark:text-gray-300">
         Here are some technologies I’ve worked with recently:
       </p>
     </div>
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-4xl mx-auto px-4">
-      
+
       <TechStackCard
         icon={<i className="devicon-dart-plain"></i>}
         name="Dart"
@@ -55,8 +55,8 @@ const TechStackSection = ({scrollToSection}) => {
         name="CSS3"
         link="https://developer.mozilla.org/en-US/docs/Web/CSS"
       />
-     
-    
+
+
     </div>
   </section>
  );

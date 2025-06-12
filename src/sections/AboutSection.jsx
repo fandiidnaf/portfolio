@@ -3,8 +3,8 @@ import React from "react";
 const AboutSection = ({scrollToSection}) => {
     return (
         <section id="about" className="py-16 md:py-24">
-        <div className="rounded-2xl bg-white p-8 shadow-xl">
-          <h2 className="mb-8 text-4xl font-bold text-gray-900 text-center">
+        <div className="rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800 dark:shadow-2xl">
+          <h2 className="mb-8 text-4xl font-bold text-gray-900 text-center dark:text-white">
             About Me
           </h2>
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -12,10 +12,10 @@ const AboutSection = ({scrollToSection}) => {
               <img
                 src="/assets/images/photo-profile.jpg"
                 alt="Moh. Dwi Afandi"
-                className="rounded-full border-4 border-indigo-300 shadow-lg object-cover w-48 h-48 md:w-64 md:h-64"
+                className="rounded-full border-4 border-indigo-300 shadow-lg object-cover w-48 h-48 md:w-64 md:h-64 dark:border-indigo-500"
               />
             </div>
-            <div className="w-full md:w-2/3 text-lg text-gray-700 leading-relaxed">
+            <div className="w-full md:w-2/3 text-lg text-gray-700 leading-relaxed dark:text-gray-300">
               <p className="mb-4">
                 Hello! My name is Moh. Dwi Afandi. I’m a passionate{" "}
                 <b>Mobile Developer</b> with a strong background in software
@@ -38,7 +38,7 @@ const AboutSection = ({scrollToSection}) => {
           </div>
         </div>
       </section>
-    ); 
+    );
 };
 
 export default AboutSection;

@@ -1,14 +1,16 @@
 import React from "react";
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard from "../components/ProjectCard"; // Ensure ProjectCard also supports dark mode
 
 const ProjectsSection = ({scrollToSection, showMobileWarning}) => {
     return (
         <section id="projects" className="py-16 md:py-24 min-h-[80vh]">
-        <h2 className="mb-12 text-4xl font-bold text-gray-900 text-center">
+        <h2 className="mb-12 text-4xl font-bold text-gray-900 text-center dark:text-white"> {/* Dark mode for heading */}
           My Projects
         </h2>
-        <p className="mb-12 text-center text-md text-gray-600 max-w-2xl mx-auto bg-yellow-50 border border-yellow-300 rounded-lg p-4 shadow-sm">
-          <span className="font-medium text-yellow-800">Note:</span> Some
+        <p className="mb-12 text-center text-md text-gray-600 max-w-2xl mx-auto
+                      bg-yellow-50 border border-yellow-300 rounded-lg p-4 shadow-sm
+                      dark:bg-yellow-900 dark:border-yellow-700 dark:text-gray-200"> {/* Dark mode for note background, border, and text */}
+          <span className="font-medium text-yellow-800 dark:text-yellow-400">Note:</span> Some
           features may be unavailable or behave differently on the web version
           compared to the mobile app. These previews are for demonstration
           purposes and may not reflect the full mobile experience.
