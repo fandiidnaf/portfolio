@@ -5,7 +5,10 @@ export default function ResumeViewer(scrollToSection) {
   const [showViewer, setShowViewer] = useState(false);
 
   return (
-    <div id="resume" className="p-6 bg-white rounded-2xl shadow-xl dark:bg-gray-800 transition-colors duration-300">
+    <div
+      id="resume"
+      className="p-6 bg-white rounded-2xl shadow-xl dark:bg-gray-800 transition-colors duration-300"
+    >
       <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white text-center">
         My Resume
       </h2>
